@@ -8,11 +8,15 @@ sut:
 web1604-php7:
   build: .
   dockerfile: ./1604/Dockerfile
+  volumes:
+    - /Users/DocteurNo/Sites/docker/docker-lamp-php/app:/app:rw
   ports:
     - '8000:80'
 
 web1404-php7:
   build: .
   dockerfile: ./1404/Dockerfile
+  volumes:
+    - /Users/DocteurNo/Sites/docker/docker-lamp-php/app:/app:rw
   ports:
     - '8001:80'

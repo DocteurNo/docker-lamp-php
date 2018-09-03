@@ -158,8 +158,8 @@ git clone https://github.com/docteurno/docker-lamp-php.git
 cd docker-lamp-php
 
 # Build both the 16.04 image and the 14.04 php7 images
-docker build -t=stanou49/lamp:latest -f ./1604/Dockerfile-php7 .
-docker build -t=stanou49/lamp:latest-1404 -f ./1404/Dockerfile-php7 .
+docker build -t=stanou49/lamp:latest -f ./1604/
+docker build -t=stanou49/lamp:latest-1404 -f ./1404/
 
 # Run the 14.04 image as a container
 docker run -p "8000:80" stanou49/lamp:latest-1404 -d
