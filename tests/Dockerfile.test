@@ -1,5 +1,5 @@
 FROM phusion/baseimage
-MAINTAINER Matthew Rayner <matt@mattrayner.co.uk>
+LABEL maintainer="Stanislas Neau <stanou49@yahoo.fr>"
 
 RUN apt-get update && apt-get install -yq curl && apt-get clean
 
