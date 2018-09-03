@@ -26,9 +26,6 @@ With both Ubuntu **16.04** and **14.04** images on the latest-1604 and latest-14
 - [Adding your own content](#adding-your-own-content)
   - [Adding your app](#adding-your-app)
   - [Persisting your MySQL](#persisting-your-mysql)
-  - [Doing both](#doing-both)
-    - [`.bash_profile` alias examples](#bash_profile-alias-examples)
-      - [Example usage](#example-usage)
 - [Developing the image](#developing-the-image)
   - [Building and running](#building-and-running)
   - [Testing](#testing)
@@ -145,54 +142,10 @@ You may also add `-p 3306:3306` after `-p 80:80` to expose the mysql sockets on 
 
 ```bash
 docker run -i -t -p "80:80" -v ${PWD}/mysql:/var/lib/mysql stanou49/lamp
-```
 
-### Doing both
+# Or with your project
 
-The below command is our 'recommended' solution. It both adds your own PHP and persists database files. We have created a more advanced alias in our `.bash_profile` files to enable the short commands `ldi` and `launchdocker`. See the next section for an example.
-
-```bash
-docker run -i -t -p "80:80" -v ${PWD}/app:/app -v ${PWD}/mysql:/var/lib/mysql stanou49/lamp:latest
-```
-
-#### `.bash_profile` alias examples
-
-The below example can be added to your `~/.bash_profile` file to add the alias commands `ldi` and `launchdocker`. By default it will launch the 16.04 image - if you need the 14.04 image, simply change the `docker run` command to use `stanou49/lamp:latest-1404` instead of `stanou49/lamp:latest`.
-
-```bash
-# A helper function to launch docker container using stanou49/lamp with overrideable parameters
-#
-# $1 - Apache Port (optional)
-# $2 - MySQL Port (optional - no value will cause MySQL not to be mapped)
-function launchdockerwithparams {
-    APACHE_PORT=80
-    MYSQL_PORT_COMMAND=""
-
-    if ! [[ -z "$1" ]]; then
-        APACHE_PORT=$1
-    fi
-
-    if ! [[ -z "$2" ]]; then
-        MYSQL_PORT_COMMAND="-p \"$2:3306\""
-    fi
-
-    docker run -i -t -p "$APACHE_PORT:80" $MYSQL_PORT_COMMAND -v ${PWD}/app:/app -v ${PWD}/mysql:/var/lib/mysql stanou49/lamp:latest
-}
-alias launchdocker='launchdockerwithparams $1 $2'
-alias ldi='launchdockerwithparams $1 $2'
-```
-
-##### Example usage
-
-```bash
-# Launch docker and map port 80 for apache
-ldi
-
-# Launch docker and map port 8080 for apache
-ldi 8080
-
-# Launch docker and map port 3000 for apache along with 3306 for MySQL
-ldi 3000 3306
+docker run -i -t -p "80:80" -v ${PWD}/app:/app -v ${PWD}/mysql:/var/lib/mysql stanou49/lamp
 ```
 
 ## Developing the image

@@ -7,12 +7,12 @@ sut:
 
 web1604-php7:
   build: .
-  dockerfile: ./1604/Dockerfile-php7
+  dockerfile: ./1604/Dockerfile
   ports:
-    - 8000:80'
+    - '8000:80'
 
 web1404-php7:
   build: .
-  dockerfile: ./1404/Dockerfile-php7
+  dockerfile: ./1404/Dockerfile
   ports:
     - '8001:80'
