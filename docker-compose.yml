@@ -1,0 +1,11 @@
+web1604-php7:
+  build: .
+  dockerfile: ./Dockerfile
+  ports:
+    - '8000:80'
+
+web1404-php7:
+  build: .
+  dockerfile: ./Dockerfile-1404
+  ports:
+    - '8001:80'
