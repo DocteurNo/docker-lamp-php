@@ -20,13 +20,9 @@ deployment:
       - docker tag ci_web1604-php7:latest stanou49/lamp:latest
       - docker tag ci_web1604-php7:latest stanou49/lamp:latest-1604
       - docker tag ci_web1604-php7:latest stanou49/lamp:latest-1604-php7
-      - docker tag ci_web1404-php7:latest stanou49/lamp:latest-1404
-      - docker tag ci_web1404-php7:latest stanou49/lamp:latest-1404-php7
       - docker push stanou49/lamp:latest
       - docker push stanou49/lamp:latest-1604
       - docker push stanou49/lamp:latest-1604-php7
-      - docker push stanou49/lamp:latest-1404
-      - docker push stanou49/lamp:latest-1404-php7
   dev:
     branch: develop
     commands:
@@ -34,10 +30,6 @@ deployment:
       - docker tag ci_web1604-php7:latest stanou49/lamp:dev
       - docker tag ci_web1604-php7:latest stanou49/lamp:dev-1604
       - docker tag ci_web1604-php7:latest stanou49/lamp:dev-1604-php7
-      - docker tag ci_web1404-php7:latest stanou49/lamp:dev-1404
-      - docker tag ci_web1404-php7:latest stanou49/lamp:dev-1404-php7
       - docker push stanou49/lamp:dev
       - docker push stanou49/lamp:dev-1604
       - docker push stanou49/lamp:dev-1604-php7
-      - docker push stanou49/lamp:dev-1404
-      - docker push stanou49/lamp:dev-1404-php7

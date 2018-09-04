@@ -3,7 +3,6 @@ sut:
   dockerfile: Dockerfile.test
   links:
     - web1604-php7
-    - web1404-php7
 
 web1604-php7:
   build: .
@@ -12,11 +11,3 @@ web1604-php7:
     - /Users/DocteurNo/Sites/docker/docker-lamp-php/app:/app:rw
   ports:
     - '8000:80'
-
-web1404-php7:
-  build: .
-  dockerfile: ./1404/Dockerfile
-  volumes:
-    - /Users/DocteurNo/Sites/docker/docker-lamp-php/app:/app:rw
-  ports:
-    - '8001:80'

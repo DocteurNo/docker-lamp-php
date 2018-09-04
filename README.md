@@ -44,20 +44,20 @@ With both Ubuntu **16.04** and **14.04** images on the latest-1604 and latest-14
 
 As a developer, part of my day to day role is to build LAMP applications. I searched in vein for an image that had everything I wanted, up-to-date packages, a simple interface, good documentation and active support.
 
-To complicate things even further I needed an image, or actually two, that would run my applications on both 14.04 and 16.04. Having two entirely separate workflows didn't make any sense to me, and Docker-LAMP was born.
+To complicate things even further I needed an image, or actually two, that would run my applications on both 16.04.
 
-Designed to be a single interface that just 'gets out of your way', and works on 14.04 and 16.04 with php 5 and 7. You can move between all 4 images without changing how you work with Docker.
+Designed to be a single interface that just 'gets out of your way', and works on 16.04 with php 7.
 
 ## Image Versions
 
 There are 4 main 'versions' of the docker image. The table below shows the different tags you can use, along with the PHP, MySQL and Apache versions that come with it.
 
-| Component                | `latest-1404-php7` | `latest-1604-php7` |
-| ------------------------ | ------------------ | ------------------ |
-| [Apache][apache]         | `2.4.7`            | `2.4.18`           |
-| [MySQL][mysql]           | `5.5.61`           | `5.7.23`           |
-| [PHP][php]               | `7.2.9`            | `7.2.9`            |
-| [phpMyAdmin][phpmyadmin] | `4.8.2`            | `4.8.2`            |
+| Component                | `latest or latest-1604 or latest-1604-php7` |
+| ------------------------ | ------------------------------------------- |
+| [Apache][apache]         | `2.4.18`                                    |
+| [MySQL][mysql]           | `5.7.23`                                    |
+| [PHP][php]               | `7.2.9`                                     |
+| [phpMyAdmin][phpmyadmin] | `4.8.2`                                     |
 
 ## Using the image
 
@@ -67,16 +67,13 @@ This is the quickest way
 
 ```bash
 # Launch a 16.04 (php7) based image
-docker run -p "80:80" -v ${PWD}/app:/app stanou49/lamp:latest-1604-php7
-
-# Launch a 14.04 (php7) based image
-docker run -p "80:80" -v ${PWD}/app:/app stanou49/lamp:latest-1404-php7
+docker run -p "80:80" -v ${PWD}/app:/app stanou49/lamp:latest
 ```
 
 ### With a Dockerfile
 
 ```docker
-FROM stanou49/lamp:latest-1604
+FROM stanou49/lamp:latest
 
 # Your custom commands
 
@@ -157,12 +154,11 @@ docker run -i -t -p "80:80" -v ${PWD}/app:/app -v ${PWD}/mysql:/var/lib/mysql st
 git clone https://github.com/docteurno/docker-lamp-php.git
 cd docker-lamp-php
 
-# Build both the 16.04 image and the 14.04 php7 images
+# Build both the 16.04 image
 docker build -t=stanou49/lamp:latest -f ./1604/
-docker build -t=stanou49/lamp:latest-1404 -f ./1404/
 
-# Run the 14.04 image as a container
-docker run -p "8000:80" stanou49/lamp:latest-1404 -d
+# Run the 16.04 image as a container
+docker run -p "8000:80" stanou49/lamp:latest -d
 
 # Sleep to allow the container to boot
 sleep 5
@@ -191,7 +187,7 @@ First, build that latest version of our docker-compose images.
 
 #### `docker-compose -f docker-compose.test.yml -p ci up -d;`
 
-Launch our docker containers (`web1604`, `web1404` and `sut` or _system under tests_) in daemon mode.
+Launch our docker containers (`web1604` and `sut` or _system under tests_) in daemon mode.
 
 #### `docker logs -f ci_sut_1;`
 
